@@ -107,54 +107,20 @@
                 </span>
             </div>
             <div class="item_cat_all">
-                <p>${list2[0].name}</p>
-                <ul>
-                    <c:forEach items="${list3[0]}" var="gc">
-                        <li><a href="#">${gc.name}</a></li>
-                    </c:forEach>
-                </ul>
-                <p>${list2[1]}</p>
-                <ul>
-                    <c:forEach items="${list3[1]}" var="gc">
-                        <li><a href="#">${gc.name}</a></li>
-                    </c:forEach>
-                </ul>
-                <p>${list2[2]}</p>
-                <ul>
-                    <c:forEach items="${list3[2]}" var="gc">
-                        <li><a href="#">${gc.name}</a></li>
-                    </c:forEach>
-                </ul>
+                <c:forEach items="${list2}" varStatus="abc">
+                    <p>${list2[abc.index]}</p>
+                    <ul>
+                        <c:forEach items="${list3[abc.index]}" var="gc">
+                            <li>
+                                <a href="../goods/showSearch.do?categoryId=${gc.id}">${gc.name}</a>
+                            </li>                        
+                        </c:forEach>
+                    </ul>
+                </c:forEach>
+                
             </div>
         </div>
-        <div class="item_msg lf">
-            <img src="../images/itemCat/study_computer_img3.png" alt=""/>
-
-            <p class="bottom_ys2">戴尔(DELL)XPS13-9360-R1609 13.3英寸微边框笔记本电脑</p>
-
-            <p class="bottom_ys3">￥4600.00</p>
-
-            <p class="bottom_ys4 color_2"><a href="product_details.jsp">查看详情</a></p>
-        </div>
-        <div class="item_msg lf">
-            <img src="../images/itemCat/study_computer_img4.png" alt=""/>
-
-            <p class="bottom_ys2">14.8mm超轻薄笔记本电脑  航海王版 13.3英寸微边框笔记本电脑</p>
-
-            <p class="bottom_ys3">￥5600.00</p>
-
-            <p class="bottom_ys4 color_2"><a href="product_details.jsp">查看详情</a></p>
-        </div>
-        <div class="item_msg lf">
-            <img src="../images/itemCat/study_computer_img5.png" alt=""/>
-
-            <p class="bottom_ys2">联想(Lenovo) YOGA900 多彩版 13.3英寸微边框笔记本电脑</p>
-
-            <p class="bottom_ys3">￥6600.00</p>
-
-            <p class="bottom_ys4 color_2"><a href="product_details.jsp">查看详情</a></p>
-        </div>
-    </div>
+  
 </div>
 <!--楼梯2f-->
 <h2 id="stationery" class="stair"><span><img src="../images/itemCat/stationery_icon.png" alt=".stair"/></span>办公文具 /2F</h2>
