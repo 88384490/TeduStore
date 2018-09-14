@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.store.mapper.AddressMapper">
+
+    <resultMap type="cn.tedu.store.bean.Address" id="resultAddress">
+        <id column="id" property="id"/>
+        <result column="uid" property="uId"/>
+        <result column="recv_name" property="recvName"/>
+        <result column="recv_province" property="recvProvince"/>
+        <result column="recv_city" property="recvCity"/>
+        <result column="recv_area" property="recvArea"/>
+        <result column="recv_district" property="recvDistrict"/>
+        <result column="recv_address" property="recvAddress"/>
+        <result column="recv_phone" property="recvPhone"/>
+        <result column="recv_zip" property="recvZip"/>
+        <result column="recv_tag" property="recvTag"/>
+        <result column="isDefault" property="isDefault"/>
+        <result column="created_user" property="createdUser"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="modified_user" property="modifiedUser"/>
+        <result column="modified_time" property="modifiedTime"/>
+    </resultMap>
+
+    <!-- void insertAddress(Address address) -->
+    <insert id="insertAddress" parameterType="cn.tedu.store.bean.Address">
+        insert into
+            t_address (
+                uid, recv_name, recv_province, recv_city, recv_area, recv_district,
+                recv_address, recv_phone, recv_tel, recv_zip, recv_tag, isDefault,
+                created_user, created_time, modified_user, modified_time
+            )
+        values (
+            #{uId},
+            #{recvName},
+            #{recvProvince},
+            #{recvCity},
+            #{recvArea},
+            #{recvDistrict},
+            #{recvAddress},
+            #{recvPhone},
+            #{recvTel},
+            #{recvZip},
+            #{recvTag},
+            #{isDefault},
+            #{createdUser},
+            #{createdTime},
+            #{modifiedUser},
+            #{modifiedTime}
+        )
+    </insert>
+
+    <!-- Integer updateById(Integer id) -->
+    <update id="updateById" parameterType="java.lang.Integer">
+        update
+            t_address
+        set
+            isDefault = 1
+        where
+            id = #{id}
+    </update>
+
+    <!-- Integer updataByUid(Integer uid) -->
+    <update id="updataByUid" parameterType="java.lang.Integer">
+        update
+            t_address
+        set
+            isDefault = 0
+        where
+            uid = #{uId}
+    </update>
+
+    <!-- Address selectById(Integer id) -->
+    <select id="selectById" resultType="cn.tedu.store.bean.Address" resultMap="resultAddress">
+        select
+            uid,
+            recv_name,
+            recv_province,
+            recv_city,
+            recv_area,
+            recv_district,
+            recv_address,
+            recv_phone,
+            recv_tel,
+            recv_zip,
+            recv_tag,
+            isDefault,
+            created_user,
+            created_time,
+            modified_user,
+            modified_time
+        from
+            t_address
+        where
+            id = #{id}
+    </select>
+
+    <!-- Address selectByUid(Integer uid) -->
+    <select id="selectByUid" resultType="cn.tedu.store.bean.Address" resultMap="resultAddress">
+        select
+            id,
+            uid,
+            recv_name,
+            recv_province,
+            recv_city,
+            recv_area,
+            recv_district,
+            recv_address,
+            recv_phone,
+            recv_tel,
+            recv_zip,
+            recv_tag,
+            isDefault,
+            created_user,
+            created_time,
+            modified_user,
+            modified_time
+        from
+            t_address
+        where
+            uid = #{uId}
+    </select>
+
+    <!-- void updateAddressById(Address address) -->
+    <update id="updateAddressById" parameterType="cn.tedu.store.bean.Address">
+        update
+            t_address
+        set
+            recv_name = #{recvName},
+            recv_province = #{recvProvince},
+            recv_city = #{recvCity},
+            recv_area = #{recvArea},
+            recv_address = #{recvAddress},
+            recv_phone = #{recvPhone},
+            recv_tel = #{recvTel},
+            recv_zip = #{recvZip},
+            recv_tag = #{recvTag}
+        where
+            id=#{id}
+    </update>
+</mapper>

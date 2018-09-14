@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/jsEvent.css">
+    <script src="../js/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".sidebarList").hover(
+                function () {
+                    $(".sidebarList").css("border-left","red");
+                },
+                function () {
+                    $(".sidebarList").css("border-left","white");
+                }
+            )
+        });
+    </script>
+</head>
+<body id="body">
+
+<!--侧边栏-->
+<div id="sidebar">
+    <div class="sidebarImage">
+        <img src="" alt="">
+    </div>
+    <hr>
+    <nav id="sidebarLike">
+        <div>
+            <ul id="sidebarUl">
+                <li class="sidebarList" onmouseenter="a()">
+                    <a href="">个人简历</a>
+                </li>
+                <li class="sidebarList">
+                    <a href="">链接2</a>
+                </li>
+                <li class="sidebarList">
+                    <a href="">链接3</a>
+                </li>
+                <li class="sidebarList">
+                    <a href="">链接4</a>
+                </li>
+                <li class="sidebarList">
+                    <a href="">链接5</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="out"></div>
+</div>
+
+<!--主体区-->
+<article id="main-wrap">
+
+    <article id="main">
+        <!--头部图片区-->
+        <header id="headerImage">
+            <img width="980" height="480" src="../images/index/index_guild.png">
+        </header>
+        <hr>
+
+        <!--内容区-->
+        <section id="content">
+
+            <!--内容区标题-->
+            <div class="title">
+                <h1>个人作品专区</h1>
+            </div>
+
+            <!--项目展示区-->
+            <div id="caseShow">
+
+                <ul>
+                    <!--项目1-->
+                    <li>
+                        <div class="showWindow" id="case1">
+                            <img src="">
+                            <h1>标题</h1>
+                        </div>
+                    </li>
+
+                    <!--项目2-->
+                    <li>
+                        <div class="showWindow" id="case2">
+                            <img src="">
+                            <h1>标题</h1>
+                        </div>
+                    </li>
+                    <!--项目3-->
+                    <li>
+                        <div class="showWindow" id="case3">
+                            <img src="">
+                            <h1>标题</h1>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+            <!--项目详情展示-->
+            <div id="caseInfo">
+                <h1>项目详情</h1>
+                <h3>2222222222222222222222222222222222222222222222222
+                2222222222222222222222222222222222222222222222222222
+                2222222222222222222222222222222222222222222222222222</h3>
+            </div>
+        </section>
+    </article>
+
+</article><!--主体区结尾-->
+
+<script>
+    function clickCaseEvent(){
+        var clickWindow = document.getElementById("case1")
+
+    }
+</script>
+</body>
+</html>

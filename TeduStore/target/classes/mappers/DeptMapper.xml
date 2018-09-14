@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- namespace表示命名空间 ，值必须是接口的名称(包括包名) -->
+<!-- 实现类如果没有，mybatis框架会生成接口的实现类 -->
+<mapper namespace="cn.tedu.store.mapper.UserMapper">
+    <!--
+    1 处理字段名和属性名不相同的第二种解决方案
+    2 把字段和属性之间做一个映射
+    3 resultMap表示实现映射的节点
+    4 type表示映射的java类的类型
+    5 id表示节点的值，唯一
+    6 column表示用来映射主键字段的值
+    7 property表示用来映射类中的属性
+    8 result表示映射除了主键之外的其它字段
+    -->
+    <!--
+    <resultMap type="cn.tedu.bean.Address" id="resultAddress">
+        <id column="id" property="id"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="area" property="area"/>
+        <result column="user_address" property="userAddress"/>
+    </resultMap>
+    -->
+    <resultMap id="resultUser" type="cn.tedu.store.bean.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="gender" property="gender"/>
+        <result column="person_image" property="personImage"/>
+        <result column="created_user" property="createdUser"/>
+    </resultMap>
+
+    <insert id="insertUser" parameterType="cn.tedu.store.bean.User">
+        insert into t_user (
+            username, password, email, phone
+        ) values (
+            #{username}, #{password}, #{email}, #{phone}
+        )
+    </insert>
+
+    <!-- User selectById(Integer id) -->
+    <select id="selectById" resultType="cn.tedu.store.bean.User">
+        select
+            id,username,password,email,phone,person_image,gender
+        from
+            t_user
+        where
+            id = #{id}
+    </select>
+
+    <!-- User selectByName(String username) -->
+    <select id="selectByName" resultType="cn.tedu.store.bean.User">
+        select
+            id,
+            username,
+            password,
+            email,
+            phone,
+            person_image,
+            gender
+        from
+            t_user
+        where
+            username = #{username}
+    </select>
+
+    <!-- Integer selectByEmail(String email) -->
+    <select id="selectByEmail" resultType="java.lang.Integer">
+        select count(*)
+        from
+            t_user
+        where
+            email = #{email}
+    </select>
+
+    <!-- Integer selectByPhone(String phone) -->
+    <select id="selectByPhone" resultType="java.lang.Integer">
+        select count(*)
+        from
+            t_user
+        where
+            phone = #{phone}
+    </select>
+
+    <!-- void updateUser(User user) -->
+    <update id="updateUser" parameterType="cn.tedu.store.bean.User">
+        update
+        t_user
+        <set>
+            <if test="password!=null">
+                password=#{password},
+            </if>
+            <if test="username!=null">
+                username=#{username},
+            </if>
+            <if test="email!=null">
+                email=#{email},
+            </if>
+            <if test="phone!=null">
+                phone=#{phone},
+            </if>
+            <if test="gender!=null">
+                gender=#{gender}
+            </if>
+        </set>
+        where
+        id=#{id}
+    </update>
+
+    <!-- void updateImage(
+            @Param("id") Integer id,
+            @Param("image") String image
+    );-->
+    <update id="updateImage">
+        update
+          t_user
+        set
+            person_image = #{personImage}
+        where
+            id=#{id}
+    </update>
+</mapper>
+
+
+
+
+

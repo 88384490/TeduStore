@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.store.mapper.DictMapper">
+
+    <resultMap id="resultProvince" type="cn.tedu.store.bean.Province">
+        <id column="id" property="id"/>
+        <result column="province_code" property="provinceCode"/>
+        <result column="province_name" property="provinceName"/>
+    </resultMap>
+
+    <resultMap id="resultCity" type="cn.tedu.store.bean.City">
+        <id column="id" property="id"/>
+        <result column="province_code" property="provinceCode"/>
+        <result column="city_code" property="cityCode"/>
+        <result column="city_name" property="cityName"/>
+    </resultMap>
+
+    <resultMap id="resultArea" type="cn.tedu.store.bean.Area">
+        <id column="id" property="id"/>
+        <result column="city_code" property="cityCode"/>
+        <result column="area_code" property="areaCode"/>
+        <result column="area_name" property="areaName"/>
+    </resultMap>
+
+    <!--Province selectProvince(Province province)-->
+    <select id="selectProvince" resultType="cn.tedu.store.bean.Province" resultMap="resultProvince">
+        select
+            id,
+            province_code,
+            province_name
+        from
+            t_dict_provinces;
+    </select>
+
+    <!--List<City> selectCity()-->
+    <select id="selectCity" resultType="cn.tedu.store.bean.City" resultMap="resultCity">
+        select
+            id,
+            province_code,
+            city_code,
+            city_name
+        from
+            t_dict_cities
+        where
+            province_code = #{provinceCode}
+    </select>
+
+    <!-- List<Area> selectArea(String cityCode) -->
+    <select id="selectArea" resultType="cn.tedu.store.bean.Area" resultMap="resultArea">
+        select
+            id,
+            city_code,
+            area_code,
+            area_name
+        from
+            t_dict_areas
+        where
+            city_code = #{cityCode}
+    </select>
+
+    <!-- List<Province> selectByProvinceCode(String prvoinceCode) -->
+    <select id="selectByProvinceCode" resultType="java.lang.String"
+            resultMap="resultProvince">
+        select
+            id,
+            province_code,
+            province_name
+        from
+            t_dict_provinces
+        where
+            province_code = #{provinceCode}
+    </select>
+
+    <!-- List<City> selectByCityCode(String cityCode) -->
+    <select id="selectByCityCode" resultType="cn.tedu.store.bean.City" resultMap="resultCity">
+        select
+            id,
+            province_code,
+            city_code,
+            city_name
+        from
+            t_dict_cities
+        where
+            city_code = #{cityCode}
+    </select>
+
+    <!-- List<Area> selectByAreaCode(String areaCode) -->
+    <select id="selectByAreaCode" resultType="cn.tedu.store.bean.Area" resultMap="resultArea">
+        select
+            id,
+            city_code,
+            area_code,
+            area_name
+        from
+            t_dict_areas
+        where
+            city_code = #{cityCode}
+    </select>
+
+</mapper>
+
+
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.store.mapper.GoodsCategoryMapper">
+
+    <resultMap id="resultGoodsCategory" type="cn.tedu.store.bean.GoodsCategory">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="status" property="status"/>
+        <result column="sort_order" property="sortOrder"/>
+        <result column="is_parent" property="isParent"/>
+        <result column="created_user" property="createdUser"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="modified_user" property="modifiedUser"/>
+        <result column="modified_time" property="modifiedTime"/>
+    </resultMap>
+
+
+
+    <!-- List<GoodsCategory> selectGoodsCategory(
+            @Param("parentId") int parentId,
+            @Param("offset") int offset,
+            @Param("count") int count); -->
+    <select id="selectGoodsCategory" resultType="cn.tedu.store.bean.GoodsCategory"
+            resultMap="resultGoodsCategory">
+        select
+            id,parent_id,name,status,sort_order,is_parent,created_user,created_time,
+            modified_user,modified_time
+        from
+            t_goods_category
+        where
+            parent_id=#{parentId}
+        and
+            status=1
+        <if test="offset!=null">
+            limit #{offset},#{count}
+        </if>
+    </select>
+
+</mapper>

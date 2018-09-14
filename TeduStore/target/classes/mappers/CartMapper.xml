@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.store.mapper.CartMapper">
+
+    <resultMap id="resultCart" type="cn.tedu.store.bean.Cart">
+        <id column="id" property="id"/>
+        <result column="uid" property="uId"/>
+        <result column="goods_id" property="goodsId"/>
+        <result column="num" property="num"/>
+        <result column="created_user" property="createdUser"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="modified_user" property="modifiedUser"/>
+        <result column="modified_time" property="modifiedTime"/>
+    </resultMap>
+
+
+    <!-- void insertCart(Cart cart) -->
+    <insert id="insertCart" parameterType="cn.tedu.store.bean.Cart">
+        insert into
+            t_cart
+            (uid,
+             goods_id,
+             num,
+             image,
+             title,
+             price,
+             created_user,
+             credated_time
+            ) values (
+            #{uId}, #{goodsId}, #{num}, #{createdUser}, #{createdTime}
+        );
+    </insert>
+
+    <!-- List<CartVo> selectByUid(Integer uid) -->
+    <select id="selectByUid" resultType="cn.tedu.store.vo.CartVo">
+        select
+            t_cart.id id,
+            t_cart.uid,
+            t_cart.goods_id goodsId,
+            t_cart.num num,
+            image,
+            price,
+            t_cart.credated_time createdTime,
+            t_cart.created_user createdUser,
+            t_cart.modified_time modifiedTime,
+            t_cart.modified_user modifiedUser
+        from
+            t_cart, t_goods
+        where
+            goods_id = t_goods.id
+            and
+            uid = #{uId}
+    </select>
+
+    <!--void deleteByIds(Integer[] ids)-->
+    <delete id="deleteByIds">
+        delete from
+            t_cart
+        where
+          id
+        in
+            <foreach collection="array" item="id" open="(" separator="," close=")">
+                <!-- collection表示定义集合的类型如array，item表示定义变量
+                     open表示从什么标志开始，close表示到什么标志结束，separator表示分隔符-->
+                #{id}
+            </foreach>
+    </delete>
+
+    <!--void deleteById(Integer id)-->
+    <delete id="deleteById">
+        {cell del(#{id})}
+    </delete>
+</mapper>
